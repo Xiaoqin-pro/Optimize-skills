@@ -1,3 +1,0 @@
-interface:
-  display_name: "Metaheuristic Research Pipeline"
-  short_description: "Run MATLAB swarm-optimization research end to end"

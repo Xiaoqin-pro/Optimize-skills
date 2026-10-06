@@ -5,13 +5,11 @@ Personal Codex skill package for mechanism-driven research on PSO, CSO, ABC and 
 ## What it does
 
 ```text
-failure question
-    -> pain-first claim card
-    -> mechanism novelty / equivalence gate
-    -> MATLAB kill pilot
-    -> FE-fair analysis
-    -> red-team review
-    -> resumable multi-generation search
+metaheuristic-research
+    -> metaheuristic-idea
+    -> matlab-experiment
+    -> metaheuristic-analyze
+    -> metaheuristic-review
 ```
 
 This package is intentionally personal and opinionated. It does not include grant, patent, or unrelated application workflows.
@@ -35,13 +33,13 @@ OpenAI's plugin format declares skills with a root `skills/` directory; the proj
 4. Start with:
 
 ```text
-Use metaheuristic-research-pipeline.
+Use metaheuristic-research in autonomous mode.
 Investigate premature convergence of PSO on rotated multimodal landscapes.
-Use the local MATLAB backend. Let it screen CPU/GPU only for an explicitly GPU-capable, vectorized objective; the bundled CEC MEX objectives remain CPU paths.
+Maximum 5 generations. Use the local MATLAB backend.
 Stop before confirmatory evaluation and show the surviving candidates.
 ```
 
-For a new question, the pipeline invokes `metaheuristic-pain-first-idea-discovery` first. For a frozen question, use `metaheuristic-idea-discovery`. For a single pilot use `matlab-experiment`; for result interpretation use `metaheuristic-analyze`.
+The package exposes five skills: `metaheuristic-research` (single or bounded autonomous mode), `metaheuristic-idea` (failure question through refined candidate), `matlab-experiment` (plan through execution), `metaheuristic-analyze` (statistics and claim support) and `metaheuristic-review` (adversarial review). Existing ARIS `research-lit`, `research-wiki`, `paper-writing` and `citation-audit` remain external dependencies when needed.
 
 ## Deterministic MATLAB layer
 
@@ -64,7 +62,7 @@ See [benchmarks/README.md](benchmarks/README.md) for dimensions, entrypoints, pr
 
 ## Resume
 
-`RESEARCH_STATE.json` is the resumable state machine. Use `python scripts/research_state.py` for deterministic, atomic updates and validation; `metaheuristic-outer-loop` updates it at phase boundaries so an interrupted session can continue from the last completed candidate and phase instead of inferring state from chat history.
+`RESEARCH_STATE.json` is the resumable state machine. Use `python scripts/research_state.py` for deterministic, atomic updates and validation; `metaheuristic-research` updates it at phase boundaries so an interrupted session can continue from the last completed candidate and phase instead of inferring state from chat history.
 
 Typical state commands are:
 

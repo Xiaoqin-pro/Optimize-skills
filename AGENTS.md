@@ -4,6 +4,8 @@
 
 This skill set is for population-based stochastic optimization and swarm-intelligence algorithms, including PSO, CSO, ABC and related black-box optimizers.
 
+The five project skills are `metaheuristic-research`, `metaheuristic-idea`, `matlab-experiment`, `metaheuristic-analyze` and `metaheuristic-review`. Use the research skill for end-to-end orchestration; use a focused skill for a single idea, experiment, analysis or review task.
+
 - Primary language: MATLAB.
 - Primary execution: local CPU.
 - Supported backends: `cpu`, `gpu`, `auto`; GPU is optional and must never be a pipeline requirement.

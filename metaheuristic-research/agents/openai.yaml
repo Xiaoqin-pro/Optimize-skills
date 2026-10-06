@@ -1,0 +1,3 @@
+interface:
+  display_name: "Metaheuristic Research"
+  short_description: "Run end-to-end swarm optimization research"

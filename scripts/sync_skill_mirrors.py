@@ -20,8 +20,20 @@ def main() -> int:
     )
     if not skill_dirs:
         raise SystemExit("no canonical skills found")
+    expected_names = {path.name for path in skill_dirs}
     for mirror_root in MIRRORS:
         mirror_root.mkdir(parents=True, exist_ok=True)
+        resolved_root = ROOT.resolve()
+        resolved_mirror = mirror_root.resolve()
+        if not resolved_mirror.is_relative_to(resolved_root):
+            raise SystemExit(f"refusing to sync outside repository: {resolved_mirror}")
+        for old_skill in mirror_root.iterdir():
+            if (
+                old_skill.is_dir()
+                and (old_skill / "SKILL.md").is_file()
+                and old_skill.name not in expected_names
+            ):
+                shutil.rmtree(old_skill)
         for source in skill_dirs:
             destination = mirror_root / source.name
             if destination.exists():

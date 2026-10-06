@@ -1,48 +1,28 @@
 ---
 name: matlab-experiment
-description: Execute reproducible MATLAB experiments for swarm and metaheuristic algorithms on CEC and standard benchmarks, with FE accounting, CPU parallelism and an optional backend screening signal.
+description: Plan and run reproducible MATLAB experiments for swarm and metaheuristic algorithms, from smoke tests through confirmatory evaluation, with objective-evaluation accounting and statistical handoff.
 metadata:
   short-description: Run fair MATLAB CEC experiments
 ---
 
-# MATLAB Metaheuristic Experiment Executor
+# MATLAB Metaheuristic Experiments
 
-Run the requested level and candidate in `$ARGUMENTS`. Read `AGENTS.md`, `RESEARCH_BRIEF.md`, `RESEARCH_STATE.json`, `protocol/EXPERIMENT_RULES.md`, `protocol/MATLAB_STYLE.md`, the candidate experiment plan and the selected suite manifest under `benchmarks/manifests/`. Use the matching adapter under `benchmarks/adapters/` and `benchmarks/README.md`.
+Plan or run the requested level and candidate in `$ARGUMENTS`. Read `AGENTS.md`, `RESEARCH_BRIEF.md`, `protocol/EXPERIMENT_RULES.md`, `protocol/MATLAB_STYLE.md`, the candidate specification, the selected suite manifest under `benchmarks/manifests/` and `benchmarks/README.md`. If no experiment plan exists, create `ideas/<candidate>/EXPERIMENT_PLAN.md` before execution.
 
-## Backend Policy
+## Workflow
 
-Supported backends are `cpu`, `gpu` and `auto`.
+1. **Plan:** specify algorithm versions, function IDs/classes/dimensions, population, max FEs, seeds, objective conventions, boundary handling, diagnostics, statistics, promotion criteria and expected runtime. Freeze these fields before confirmatory evaluation.
+2. **Smoke:** one function, dimension and seed; verify implementation, bounds, deterministic replay, FE count and result schema.
+3. **Pilot:** screen the registered hypothesis on a small diverse set with fixed seeds.
+4. **Medium:** evaluate multiple function classes and dimensions with stronger baselines, mechanism diagnostics and minimal ablation.
+5. **Confirmatory:** use the frozen candidate and target suite protocol. Keep results separate from discovery and development data.
 
-- Default to CPU for lightweight CEC functions.
-- Use CPU `parfor` for independent runs when Parallel Computing Toolbox is available.
-- Use GPU only for vectorized, numerically heavy population evaluation or very large populations.
-- In `auto`, detect GPU availability, run a small same-configuration CPU/GPU microbenchmark, and choose GPU only when the algorithm and objective actually implement GPU execution, wall-clock speedup is meaningful (default threshold 1.5x), and values agree within the stated tolerance. The bundled CEC MEX entrypoints remain CPU paths.
-- Do not launch many MATLAB workers that contend for one GPU.
-- GPU availability must never make an experiment fail; fall back to CPU and record the selected backend.
+Run only the level requested. Use `run_one.m`, `run_batch.m` and `validate_result_table.m` in `skills/matlab-experiment/scripts/`; record every run and retain failures. Follow `protocol/EXPERIMENT_RULES.md` and pass completed results to `metaheuristic-analyze`.
 
-## Preflight
+## Execution
 
-Check MATLAB availability, candidate files, benchmark paths, objective orientation, bounds, dimension support, result directory, seed list and requested FE budget. Prefer `matlab -batch` with explicit `addpath` calls for the selected runner, suite and adapter. Do not use `addpath(genpath(pwd))`.
+Check MATLAB, candidate files, result directory, selected suite and budget before running. Use explicit `addpath` calls for the runner, selected suite and adapter; do not recursively add every CEC year. Follow the manifest's function IDs, orientation, dimensions and objective convention.
 
-## Execution Levels
+Default to CPU; bundled CEC MEX entrypoints are CPU paths. Use GPU only when both the algorithm and objective implement it and a same-configuration benchmark shows a useful speedup with equivalent values. The provided backend benchmark measures only a generic Sphere kernel.
 
-- **Smoke:** one function, one seed; validate the algorithm, bounds, deterministic replay and actual FE counting.
-- **Pilot:** small function subset, 5 seeds; screen candidates.
-- **Medium:** multiple function classes, stronger baselines, diagnostics and minimal ablation.
-- **Confirmatory:** frozen candidate, protocol-compliant suite, fixed seeds and formal statistics.
-
-Use the selected manifest and adapter. Load only the selected suite path. Use the CEC implementation's official input orientation and dimensions. Do not silently substitute a non-equivalent implementation. `benchmark_backend.m` benchmarks only a generic Sphere kernel; it does not establish GPU acceleration for a CEC objective or a complete algorithm.
-
-## Result Contract
-
-Every run writes a row containing:
-
-`candidate_id,candidate_version,algorithm,benchmark_suite,function_id,function_class,dimension,seed,population_size,max_fes,actual_fes,best_objective,known_optimum,error,runtime_seconds,backend,exit_status`
-
-Optional fields include `gpu_name`, `cpu_worker`, `diversity`, `directional_entropy`, `mean_step_size`, `stagnation_events` and `restart_count`.
-
-Raw runs are append-only. Keep NaN, Inf and failed rows with explicit status. Verify expected row count, seed coverage, duplicate IDs, FE budget and candidate/baseline comparability before handoff to `metaheuristic-analyze`.
-
-## Rules
-
-Never change seeds because results are unfavorable. Never compare unequal FE budgets. Never report only successful candidates. If a technical error occurs, diagnose and retry the same registered run; do not replace it with a new seed. Record backend and hardware for every run.
+Use the scripts and result contract documented in `skills/matlab-experiment/references/RESULT_SCHEMA.md`. Keep runs append-only, retain failures, and check FE budgets, seed coverage and baseline comparability before handing results to `metaheuristic-analyze`. Detailed fairness rules are in `protocol/EXPERIMENT_RULES.md`.
