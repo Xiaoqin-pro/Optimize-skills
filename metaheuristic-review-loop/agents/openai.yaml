@@ -1,0 +1,3 @@
+interface:
+  display_name: "Metaheuristic Review Loop"
+  short_description: "Red-team novelty and evidence"

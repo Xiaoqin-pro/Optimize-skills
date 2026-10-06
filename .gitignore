@@ -1,0 +1,19 @@
+# Download caches and nested upstream repositories
+benchmarks/official/
+benchmarks/extended/
+benchmarks/_extract_tmp*/
+**/.git/
+
+# MATLAB/editor/generated files
+*.asv
+*.m~
+*.mexw32
+# Keep the Windows 64-bit binaries shipped with the ready benchmark suites
+!benchmarks/ready/**/*.mexw64
+
+# Local experiment outputs
+results/
+logs/
+refine-logs/
+ideas/
+reviews/

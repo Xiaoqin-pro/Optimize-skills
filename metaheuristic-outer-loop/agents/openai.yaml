@@ -1,0 +1,3 @@
+interface:
+  display_name: "Metaheuristic Outer Loop"
+  short_description: "Run multi-generation idea discovery"
