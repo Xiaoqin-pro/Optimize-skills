@@ -17,3 +17,7 @@ logs/
 refine-logs/
 ideas/
 reviews/
+
+# Python validation artifacts
+__pycache__/
+*.pyc

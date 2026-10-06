@@ -1,6 +1,6 @@
 ---
 name: matlab-experiment
-description: Execute reproducible MATLAB experiments for swarm and metaheuristic algorithms on CEC and standard benchmarks, with FE accounting, CPU parallelism and optional benchmark-driven GPU fitness evaluation.
+description: Execute reproducible MATLAB experiments for swarm and metaheuristic algorithms on CEC and standard benchmarks, with FE accounting, CPU parallelism and an optional backend screening signal.
 metadata:
   short-description: Run fair MATLAB CEC experiments
 ---
@@ -16,13 +16,13 @@ Supported backends are `cpu`, `gpu` and `auto`.
 - Default to CPU for lightweight CEC functions.
 - Use CPU `parfor` for independent runs when Parallel Computing Toolbox is available.
 - Use GPU only for vectorized, numerically heavy population evaluation or very large populations.
-- In `auto`, detect GPU availability, run a small same-configuration CPU/GPU microbenchmark, and choose GPU only when wall-clock speedup is meaningful (default threshold 1.5x) and values agree within the stated tolerance.
+- In `auto`, detect GPU availability, run a small same-configuration CPU/GPU microbenchmark, and choose GPU only when the algorithm and objective actually implement GPU execution, wall-clock speedup is meaningful (default threshold 1.5x), and values agree within the stated tolerance. The bundled CEC MEX entrypoints remain CPU paths.
 - Do not launch many MATLAB workers that contend for one GPU.
 - GPU availability must never make an experiment fail; fall back to CPU and record the selected backend.
 
 ## Preflight
 
-Check MATLAB availability, candidate files, benchmark paths, objective orientation, bounds, dimension support, result directory, seed list and requested FE budget. Prefer `matlab -batch "addpath(genpath(pwd)); ..."` for non-interactive runs.
+Check MATLAB availability, candidate files, benchmark paths, objective orientation, bounds, dimension support, result directory, seed list and requested FE budget. Prefer `matlab -batch` with explicit `addpath` calls for the selected runner, suite and adapter. Do not use `addpath(genpath(pwd))`.
 
 ## Execution Levels
 
@@ -31,7 +31,7 @@ Check MATLAB availability, candidate files, benchmark paths, objective orientati
 - **Medium:** multiple function classes, stronger baselines, diagnostics and minimal ablation.
 - **Confirmatory:** frozen candidate, protocol-compliant suite, fixed seeds and formal statistics.
 
-Use the selected manifest and adapter. Load only the selected suite path; do not use `addpath(genpath(pwd))` across all CEC years. Use the CEC implementation's official input orientation and dimensions. Do not silently substitute a non-equivalent implementation.
+Use the selected manifest and adapter. Load only the selected suite path. Use the CEC implementation's official input orientation and dimensions. Do not silently substitute a non-equivalent implementation. `benchmark_backend.m` benchmarks only a generic Sphere kernel; it does not establish GPU acceleration for a CEC objective or a complete algorithm.
 
 ## Result Contract
 

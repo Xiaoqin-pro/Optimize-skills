@@ -1,7 +1,13 @@
 suite: CEC2022
 task: single-objective-bound-constrained
 function_ids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-supported_dimensions: [2, 10, 20]
+implementation_function_ids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+official_protocol_function_ids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+supported_dimensions: [10, 20]
+implementation_supported_dimensions: [2, 10, 20]
+official_protocol_dimensions: [10, 20]
+exploratory_dimensions: [2]
+confirmatory_dimensions: [10, 20]
 orientation:
   population: D_by_N
 entrypoint:
@@ -18,5 +24,6 @@ backend:
 adapter:
   path: benchmarks/adapters/cec2022_adapter.m
 notes:
+  - The bundled MEX accepts D=2,10,20, but the official runner and confirmatory protocol use D=10,20. D=2 is exploratory only; functions 6-8 are not defined at D=2.
   - Read the upstream technical report before changing bounds or objective offsets.
   - The adapter accepts N_by_D and transposes to the official D_by_N convention.

@@ -17,6 +17,6 @@ The algorithm contract is:
 [best_f, best_x, curve, diagnostics] = algorithm(objfun, config)
 ```
 
-`objfun` accepts an `N-by-D` population and returns `N` objective values. The wrapper counts each row as one objective-function evaluation and clips the final batch at `max_fes`.
+`objfun` accepts an `N-by-D` population and returns `N` objective values. The wrapper counts each row as one objective-function evaluation and rejects a batch that would exceed `max_fes`; the algorithm must request a valid batch before calling `objfun`. Confirmatory protocols should use a budget divisible by the full population size or state a pre-registered remainder policy in the experiment plan.
 
 Use `validate_result_table` before statistical analysis. Failed runs remain in the table with `exit_status` beginning with `failed:`.

@@ -22,7 +22,7 @@ Treat chaotic-map substitution, Lévy-flight insertion, opposition-based learnin
 
 ## Compute
 
-MATLAB on the local machine. Backends are `cpu`, `gpu` and `auto`; use CPU by default for light CEC functions and benchmark GPU only for heavy vectorized fitness kernels. Cheap pilot experiments may screen many candidates before medium and confirmatory experiments.
+MATLAB on the local machine. Backends are `cpu`, `gpu` and `auto`; use CPU by default for light CEC functions. GPU selection is meaningful only when the algorithm and objective implement GPU execution; the bundled CEC MEX paths are CPU. The generic backend benchmark is a screening signal, not a CEC speed claim. Cheap pilot experiments may screen many candidates before medium and confirmatory experiments.
 
 ## Experimental Levels
 

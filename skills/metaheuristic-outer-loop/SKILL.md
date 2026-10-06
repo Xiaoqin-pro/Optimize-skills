@@ -7,7 +7,7 @@ metadata:
 
 # Autonomous Metaheuristic Research Outer Loop
 
-Run the research goal in `$ARGUMENTS`. Read `AGENTS.md`, `RESEARCH_BRIEF.md`, `RESEARCH_STATE.json`, `protocol/IDEA_LIFECYCLE.md`, the literature map, prior generations and negative-result records. Update `RESEARCH_STATE.json` at every phase boundary before starting the next phase; it is the source of truth for resume after interruption.
+Run the research goal in `$ARGUMENTS`. Read `AGENTS.md`, `RESEARCH_BRIEF.md`, `RESEARCH_STATE.json`, `protocol/IDEA_LIFECYCLE.md`, the literature map, prior generations and negative-result records. Update `RESEARCH_STATE.json` at every phase boundary before starting the next phase; it is the source of truth for resume after interruption. Use `python scripts/research_state.py phase ...`, `candidate ...` and `lock-confirmatory` so updates are validated and written atomically; use `python scripts/research_state.py resume` after an interruption.
 
 ## Defaults
 

@@ -1,5 +1,7 @@
 function report = benchmark_backend(population_sizes, dimensions, repeats)
-%BENCHMARK_BACKEND Compare CPU and optional GPU batch fitness evaluation.
+%BENCHMARK_BACKEND Screen a generic Sphere kernel on CPU and optional GPU.
+%   This is a backend screening signal only. It does not execute a CEC
+%   objective, benchmark a full algorithm, or guarantee a CEC GPU speedup.
 if nargin < 1, population_sizes = [30 100 500 1000]; end
 if nargin < 2, dimensions = [30 100 500]; end
 if nargin < 3, repeats = 5; end
@@ -14,7 +16,8 @@ for n = population_sizes
         end
         row = struct('population', n, 'dimension', d, ...
             'cpu_seconds', median(t), 'gpu_seconds', NaN, 'speedup', NaN, ...
-            'gpu_available', false);
+            'gpu_available', false, 'objective_name', 'sphere_kernel', ...
+            'cec_compatible', false);
         if exist('gpuDevice', 'file') == 2
             try
                 g = gpuArray(X);

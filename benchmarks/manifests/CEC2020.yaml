@@ -1,7 +1,15 @@
 suite: CEC2020
 task: single-objective-bound-constrained
-function_ids: [1, 2, 3, 4, 6, 7, 16, 19, 22, 24, 25]
-supported_dimensions: [2, 5, 10, 15, 20, 30, 50, 100]
+# The bundled cec20_func interface exposes the ten suite functions as IDs
+# 1..10. The C++ source maps those wrapper IDs to the underlying CEC labels.
+function_ids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+implementation_function_ids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+underlying_function_ids: [1, 2, 3, 7, 4, 16, 6, 22, 24, 25]
+official_protocol_function_ids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+supported_dimensions: [2, 5, 10, 15, 20]
+implementation_supported_dimensions: [2, 5, 10, 15, 20]
+official_protocol_dimensions: [2, 5, 10, 15, 20]
+confirmatory_dimensions: [2, 5, 10, 15, 20]
 orientation:
   population: D_by_N
 entrypoint:
@@ -18,5 +26,6 @@ backend:
 adapter:
   path: benchmarks/adapters/cec2020_adapter.m
 notes:
+  - The public cec20_func wrapper accepts function IDs 1..10; do not pass the underlying labels directly to the adapter.
   - Read the upstream technical report before changing bounds or objective offsets.
   - The adapter accepts N_by_D and transposes to the official D_by_N convention.

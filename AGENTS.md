@@ -7,7 +7,7 @@ This skill set is for population-based stochastic optimization and swarm-intelli
 - Primary language: MATLAB.
 - Primary execution: local CPU.
 - Supported backends: `cpu`, `gpu`, `auto`; GPU is optional and must never be a pipeline requirement.
-- Use GPU mainly for heavy vectorized population fitness evaluation. For lightweight CEC functions, prefer CPU or CPU `parfor` after measuring.
+- Use GPU mainly for heavy vectorized population fitness evaluation. For lightweight CEC functions, prefer CPU or CPU `parfor` after measuring. The bundled CEC MEX entrypoints are CPU paths; a generic kernel benchmark is only a screening signal.
 - W&B, PyTorch, SSH and cloud queues are out of scope unless the user explicitly requests them.
 - Use the installed `research-lit`, `research-wiki`, `citation-audit` and paper-writing skills when those tasks are needed; this package does not duplicate them.
 
@@ -36,7 +36,7 @@ Follow [protocol/MATLAB_STYLE.md](protocol/MATLAB_STYLE.md), based on the local 
 
 ## MATLAB Runtime
 
-Prefer `matlab -batch` for non-interactive runs. Use `parfor` only when Parallel Computing Toolbox is available; otherwise use ordinary `for` with identical scientific semantics. GPU is optional: detect it with `canUseGPU`/`gpuDevice`, benchmark CPU versus GPU on the same configuration, and select GPU only when the measured speedup is meaningful and numerical results remain equivalent within tolerance. Do not combine many CPU workers that contend for one GPU.
+Prefer `matlab -batch` for non-interactive runs, with explicit `addpath` calls for the selected runner, suite and adapter. Do not add every benchmark directory with `addpath(genpath(pwd))`. Use `parfor` only when Parallel Computing Toolbox is available; otherwise use ordinary `for` with identical scientific semantics. GPU is optional: detect it with `canUseGPU`/`gpuDevice`, benchmark the same algorithm/objective configuration, and select GPU only when the measured speedup is meaningful and numerical results remain equivalent within tolerance. The provided `benchmark_backend` measures only a generic Sphere kernel, and CEC MEX remains CPU. Do not combine many CPU workers that contend for one GPU.
 
 ## Result Contract
 

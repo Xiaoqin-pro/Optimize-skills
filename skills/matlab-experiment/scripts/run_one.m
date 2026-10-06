@@ -73,12 +73,10 @@ end
         end
         n = size(X, 1);
         if eval_count + n > config.max_fes
-            X = X(1:max(0, config.max_fes - eval_count), :);
-            n = size(X, 1);
-        end
-        if n == 0
-            values = zeros(0, 1);
-            return;
+            error('run_one:FEBudgetRequestExceeded', ...
+                ['Algorithm requested %d evaluations with only %d remaining. ' ...
+                 'Request a smaller batch before calling objfun.'], ...
+                n, config.max_fes - eval_count);
         end
         values = objective(X, config);
         values = values(:);

@@ -37,7 +37,7 @@ OpenAI's plugin format declares skills with a root `skills/` directory; the proj
 ```text
 Use metaheuristic-research-pipeline.
 Investigate premature convergence of PSO on rotated multimodal landscapes.
-Use the local MATLAB backend with auto CPU/GPU selection.
+Use the local MATLAB backend. Let it screen CPU/GPU only for an explicitly GPU-capable, vectorized objective; the bundled CEC MEX objectives remain CPU paths.
 Stop before confirmatory evaluation and show the surviving candidates.
 ```
 
@@ -52,7 +52,7 @@ For a new question, the pipeline invokes `metaheuristic-pain-first-idea-discover
 - `smoke_test.m`: runner and schema smoke check;
 - `validate_result_table.m`: required fields and FE integrity;
 - `append_run_record.m`: append-only CSV records;
-- `benchmark_backend.m`: CPU/GPU microbenchmark.
+- `benchmark_backend.m`: generic Sphere-kernel CPU/GPU screening benchmark; it is not a CEC or full-algorithm benchmark.
 
 The algorithm contract is documented in `skills/matlab-experiment/references/RESULT_SCHEMA.md`.
 
@@ -64,7 +64,19 @@ See [benchmarks/README.md](benchmarks/README.md) for dimensions, entrypoints, pr
 
 ## Resume
 
-`RESEARCH_STATE.json` is the resumable state machine. `metaheuristic-outer-loop` updates it at phase boundaries so an interrupted session can continue from the last completed candidate and phase instead of inferring state from chat history.
+`RESEARCH_STATE.json` is the resumable state machine. Use `python scripts/research_state.py` for deterministic, atomic updates and validation; `metaheuristic-outer-loop` updates it at phase boundaries so an interrupted session can continue from the last completed candidate and phase instead of inferring state from chat history.
+
+Typical state commands are:
+
+```text
+python scripts/research_state.py start --run-id R001 --question-id Q001
+python scripts/research_state.py phase pilot --status running
+python scripts/research_state.py candidate G01-C01 pilot_running
+python scripts/research_state.py lock-confirmatory
+python scripts/research_state.py resume
+```
+
+`skills/` is canonical. Refresh the two personal mirrors with `python scripts/sync_skill_mirrors.py` and check them with `python scripts/check_skill_mirrors.py`.
 
 ## MATLAB style
 

@@ -23,6 +23,8 @@ The original repositories and archives remain under `official/` and `extended/` 
 
 Each suite has a manifest under `manifests/` and an N-by-D adapter under `adapters/`. Read the manifest before constructing an experiment. The adapter handles the official D-by-N input convention; experiment code should call the adapter with N-by-D populations.
 
+CEC2020's `cec20_func` exposes wrapper IDs `1..10`; its C++ source internally maps them to the underlying labels `[1,2,3,7,4,16,6,22,24,25]`. Pass the wrapper ID from the manifest to `cec2020_adapter`, never an underlying label. CEC2022's MEX accepts dimensions `2,10,20`, while its bundled official runner and confirmatory protocol use `10,20`; treat 2D as exploratory only.
+
 Do not add every suite with one `addpath(genpath(...))`. Suite folders contain different MEX entrypoints and example helpers. Load only the selected suite and its adapter:
 
 ```matlab
