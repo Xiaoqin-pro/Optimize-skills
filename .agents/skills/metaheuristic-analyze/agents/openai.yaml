@@ -1,0 +1,3 @@
+interface:
+  display_name: "Metaheuristic Analyze"
+  short_description: "Analyze runs with robust statistics"

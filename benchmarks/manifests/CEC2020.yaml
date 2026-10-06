@@ -1,0 +1,22 @@
+suite: CEC2020
+task: single-objective-bound-constrained
+function_ids: [1, 2, 3, 4, 6, 7, 16, 19, 22, 24, 25]
+supported_dimensions: [2, 5, 10, 15, 20, 30, 50, 100]
+orientation:
+  population: D_by_N
+entrypoint:
+  matlab: cec20_func
+objective:
+  direction: minimize
+  offset_handling: official
+source:
+  upstream: P-N-Suganthan/2020-Bound-Constrained-Opt-Benchmark
+  commit: d8b4c52f161562cd462e9b3352885e8df6fd2e41
+  local_path: benchmarks/ready/CEC2020
+backend:
+  windows_mex: true
+adapter:
+  path: benchmarks/adapters/cec2020_adapter.m
+notes:
+  - Read the upstream technical report before changing bounds or objective offsets.
+  - The adapter accepts N_by_D and transposes to the official D_by_N convention.

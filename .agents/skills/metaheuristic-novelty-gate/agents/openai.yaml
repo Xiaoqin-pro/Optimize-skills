@@ -1,0 +1,3 @@
+interface:
+  display_name: "Metaheuristic Novelty Gate"
+  short_description: "Check real novelty before implementation"

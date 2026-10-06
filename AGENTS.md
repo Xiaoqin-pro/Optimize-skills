@@ -32,7 +32,7 @@ Keep pilot, medium and confirmatory results separate. Once a candidate enters co
 
 ## MATLAB Code Style
 
-Follow [protocol/MATLAB_STYLE.md](protocol/MATLAB_STYLE.md), based on `D:\111\Desktop\噜噜\teacher`: simple procedural `.m` files, Chinese section comments, explicit optimizer loops and separate `main.m` orchestration. Preserve scientific correctness and reproducibility even when the reference project contains legacy shortcuts.
+Follow [protocol/MATLAB_STYLE.md](protocol/MATLAB_STYLE.md), based on the local teacher reference project: simple procedural `.m` files, Chinese section comments, explicit optimizer loops and separate `main.m` orchestration. Preserve scientific correctness and reproducibility even when the reference project contains legacy shortcuts.
 
 ## MATLAB Runtime
 

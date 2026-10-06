@@ -1,6 +1,6 @@
 # MATLAB Code Style
 
-The local reference project is `D:\111\Desktop\噜噜\teacher` (`main.m`, `PSO.m`, `LMS.m`). New research code should feel like that project: straightforward procedural MATLAB, compact function files, readable Chinese section comments and explicit loops where they make the algorithm easy to inspect.
+The local teacher reference project (`main.m`, `PSO.m`, `LMS.m`) establishes the baseline style. New research code should feel like that project: straightforward procedural MATLAB, compact function files, readable Chinese section comments and explicit loops where they make the algorithm easy to inspect.
 
 ## Required Style
 

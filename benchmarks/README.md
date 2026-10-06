@@ -19,12 +19,22 @@ The original repositories and archives remain under `official/` and `extended/` 
 
 `extended/CEC-Benchmark-Functions` contains MATLAB versions of CEC 2005, 2010, 2013, 2014, 2017, 2019 and CEC 2020-related functions, plus example scripts and input data. It is useful for smoke tests and cross-year comparisons, but for publication claims prefer the official suite and protocol for the target CEC year.
 
-## Typical MATLAB setup
+## Machine-readable manifests and adapters
+
+Each suite has a manifest under `manifests/` and an N-by-D adapter under `adapters/`. Read the manifest before constructing an experiment. The adapter handles the official D-by-N input convention; experiment code should call the adapter with N-by-D populations.
+
+Do not add every suite with one `addpath(genpath(...))`. Suite folders contain different MEX entrypoints and example helpers. Load only the selected suite and its adapter:
 
 ```matlab
 root = fileparts(mfilename('fullpath'));
-addpath(genpath(fullfile(root, 'ready', 'CEC2014')));
+suite_path = fullfile(root, 'ready', 'CEC2022');
+addpath(suite_path);
+addpath(fullfile(root, 'adapters'));
+f = cec2022_adapter(rand(20, 10), 1);
+rmpath(suite_path);
 ```
+
+
 
 CEC implementations differ in input orientation and supported dimensions. Read the local `readme.txt` and official technical report before writing an adapter. Do not assume that every `cecXX_func` accepts the same shape.
 

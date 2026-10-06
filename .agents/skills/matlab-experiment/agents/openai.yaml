@@ -1,0 +1,3 @@
+interface:
+  display_name: "MATLAB Experiment"
+  short_description: "Run reproducible CPU/GPU-aware CEC experiments"

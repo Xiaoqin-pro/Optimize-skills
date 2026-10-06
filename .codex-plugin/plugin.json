@@ -1,0 +1,10 @@
+{
+  "name": "optimize-skills",
+  "version": "0.2.0",
+  "description": "Personal Codex skills and deterministic MATLAB infrastructure for mechanism-driven swarm and metaheuristic optimization research.",
+  "author": {
+    "name": "Xiaoqin-pro"
+  },
+  "repository": "https://github.com/Xiaoqin-pro/Optimize-skills",
+  "skills": "./skills/"
+}

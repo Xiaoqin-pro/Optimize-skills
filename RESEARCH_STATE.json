@@ -1,0 +1,18 @@
+{
+  "run_id": "",
+  "question_id": "",
+  "generation": 0,
+  "candidate": "",
+  "phase": "not_started",
+  "status": "idle",
+  "candidate_status": {},
+  "confirmatory_locked": false,
+  "last_update_utc": "",
+  "artifacts": {
+    "core_failure_question": "",
+    "claim_card": "",
+    "literature_map": "",
+    "result_table": "",
+    "analysis_report": ""
+  }
+}

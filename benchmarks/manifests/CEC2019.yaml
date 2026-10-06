@@ -1,0 +1,22 @@
+suite: CEC2019
+task: 100-digit-challenge
+function_ids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+supported_dimensions: [2, 10, 20]
+orientation:
+  population: D_by_N
+entrypoint:
+  matlab: cec19_func
+objective:
+  direction: minimize
+  offset_handling: official
+source:
+  upstream: tsingke/CEC-Benchmark-Functions
+  commit: extended-repository
+  local_path: benchmarks/ready/CEC2019
+backend:
+  windows_mex: true
+adapter:
+  path: benchmarks/adapters/cec2019_adapter.m
+notes:
+  - Read the upstream technical report before changing bounds or objective offsets.
+  - The adapter accepts N_by_D and transposes to the official D_by_N convention.

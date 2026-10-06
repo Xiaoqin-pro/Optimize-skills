@@ -1,0 +1,22 @@
+suite: CEC2022
+task: single-objective-bound-constrained
+function_ids: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+supported_dimensions: [2, 10, 20]
+orientation:
+  population: D_by_N
+entrypoint:
+  matlab: cec22_test_func
+objective:
+  direction: minimize
+  offset_handling: official
+source:
+  upstream: P-N-Suganthan/2022-SO-BO
+  commit: de20505283b76ec6bf17a2e8fc6052e655830691
+  local_path: benchmarks/ready/CEC2022
+backend:
+  windows_mex: true
+adapter:
+  path: benchmarks/adapters/cec2022_adapter.m
+notes:
+  - Read the upstream technical report before changing bounds or objective offsets.
+  - The adapter accepts N_by_D and transposes to the official D_by_N convention.
