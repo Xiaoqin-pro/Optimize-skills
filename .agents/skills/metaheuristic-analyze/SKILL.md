@@ -7,7 +7,7 @@ metadata:
 
 # Metaheuristic Experiment Analysis
 
-Analyze `$ARGUMENTS`. Read `AGENTS.md`, `RESEARCH_BRIEF.md`, `protocol/STATISTICS_RULES.md`, the candidate plan and raw CSV files.
+Analyze `$ARGUMENTS`. Read `AGENTS.md`, `RESEARCH_BRIEF.md`, `protocol/STATISTICS_RULES.md`, the candidate plan and raw CSV files. If the candidate learns a controller, surrogate or policy, also read `protocol/LEARNING_BASED_RULES.md`.
 
 ## Integrity First
 
@@ -19,7 +19,7 @@ For every algorithm × function × dimension, report mean, median, standard devi
 
 Follow `protocol/STATISTICS_RULES.md` for independent versus paired designs, across-function blocks, Friedman/Wilcoxon tests, Holm correction and effect sizes. Report function-level win/tie/loss, practical tolerance, runtime overhead and mechanism diagnostics against the registered predictions.
 
-Compare mechanism diagnostics such as population diversity, directional entropy, step-size distribution, stagnation events and basin-escape rate. Check whether diagnostics move in the direction predicted by the candidate hypothesis.
+Compare mechanism diagnostics such as population diversity, directional entropy, step-size distribution, stagnation events and basin-escape rate. For learning-based candidates also check action frequencies, policy entropy or uncertainty, reward curves, state coverage, operator transitions, controller overhead and train/validation/test generalization. Check whether diagnostics move in the direction predicted by the candidate hypothesis.
 
 ## Decision
 
@@ -29,6 +29,6 @@ Return both a performance decision and a claim decision:
 - `HOLD`: promising but ambiguous or underpowered.
 - `REJECT`: no meaningful signal, falsified mechanism, isolated wins or simpler equivalent method performs as well.
 
-For the intended claim, state `yes`, `partial` or `no`; list what the data supports and does not support, remaining evidence gaps, a scope-corrected claim and the next action. A positive score on one function does not support a general claim. Update `research-wiki` when available.
+For the intended claim, state `yes`, `partial` or `no`; list what the data supports and does not support, remaining evidence gaps, a scope-corrected claim and the next action. A positive score on one function does not support a general claim. A learned policy that performs well only on training landscapes is not evidence of generalization. Update `research-wiki` when available.
 
 Write `results/statistics/<candidate>_<level>_analysis.md`. Do not call a method best from one function or one p-value.

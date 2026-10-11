@@ -7,15 +7,15 @@ metadata:
 
 # Metaheuristic Idea
 
-Use for `$ARGUMENTS`. Read `AGENTS.md`, `RESEARCH_BRIEF.md`, `protocol/IDEA_DISCOVERY_RULES.md`, `protocol/NOVELTY_RULES.md`, prior idea records and the target benchmark protocol. Use `research-lit` for literature retrieval; use `research-wiki` for persistent lessons when available.
+Use for `$ARGUMENTS`. Read `AGENTS.md`, `RESEARCH_BRIEF.md`, `protocol/IDEA_DISCOVERY_RULES.md`, `protocol/NOVELTY_RULES.md`, prior idea records and the target benchmark protocol. If a candidate learns a controller, operator choice, surrogate or policy, also read `protocol/LEARNING_BASED_RULES.md`. Use `research-lit` for literature retrieval; use `research-wiki` for persistent lessons when available.
 
 ## Phases
 
 1. **Failure question:** define a repeatable regime, competing explanations and why resolving it matters. Produce `CORE_FAILURE_QUESTION.md`.
 2. **Settledness and claim:** map closest work with source links and evidence levels; define ceiling/floor claims, assumptions, kill criteria and a discriminating pilot. Produce `LITERATURE_MAP.md` and `CLAIM_CARD.md`.
-3. **Mechanism candidates:** generate structurally different, falsifiable mechanisms from the failure map. State equations, causal predictions, diagnostics, null controls and overhead.
+3. **Mechanism candidates:** generate structurally different, falsifiable mechanisms from the failure map. Include fixed mechanisms and, when justified, contextual bandits, hyper-heuristics, RL controllers, surrogate models or meta-learned policies. State equations or policy transitions, causal predictions, diagnostics, null controls and overhead.
 4. **Novelty and equivalence:** normalize equations, search closest mechanisms and return `PASS`, `HOLD` or `REJECT`. Do not equate missing search results with novelty.
 5. **Pre-experiment red team:** try to falsify the candidate and compare it with a simpler null. Record evidence, `KILL`/`WOUND`/`MISS` and the decision in `RED_TEAM_SEARCH.md` and `IDEA_LEDGER.md`.
-6. **Refined spec:** only for survivors, write `REFINED_SPEC.md` with update order, boundary handling, complexity, defaults, diagnostics, ablations and falsification criteria.
+6. **Refined spec:** only for survivors, write `REFINED_SPEC.md` with update order, boundary handling, complexity, defaults, diagnostics, ablations and falsification criteria. Learning-based specs must additionally define state, action, reward/model target, training/reset schedule, training and optimization budgets, leakage controls and held-out generalization tests.
 
 Read the linked protocol files for detailed criteria. Preserve failed ideas and negative results; do not add rescue operators after a failed prediction without stating a new hypothesis.

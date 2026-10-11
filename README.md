@@ -39,7 +39,7 @@ Maximum 5 generations. Use the local MATLAB backend.
 Stop before confirmatory evaluation and show the surviving candidates.
 ```
 
-The package exposes five skills: `metaheuristic-research` (single or bounded autonomous mode), `metaheuristic-idea` (failure question through refined candidate), `matlab-experiment` (plan through execution), `metaheuristic-analyze` (statistics and claim support) and `metaheuristic-review` (adversarial review). Existing ARIS `research-lit`, `research-wiki`, `paper-writing` and `citation-audit` remain external dependencies when needed.
+The package exposes five skills: `metaheuristic-research` (single or bounded autonomous mode), `metaheuristic-idea` (failure question through refined candidate), `matlab-experiment` (plan through execution), `metaheuristic-analyze` (statistics and claim support) and `metaheuristic-review` (adversarial review). Candidates may use fixed mechanisms, contextual bandits, hyper-heuristics, RL controllers, surrogate models or meta-learning when the learning role is causal and tested for generalization. Existing ARIS `research-lit`, `research-wiki`, `paper-writing` and `citation-audit` remain external dependencies when needed.
 
 ## Deterministic MATLAB layer
 
@@ -75,6 +75,8 @@ python scripts/research_state.py resume
 ```
 
 `skills/` is canonical. Refresh the two personal mirrors with `python scripts/sync_skill_mirrors.py` and check them with `python scripts/check_skill_mirrors.py`.
+
+For a learning-based candidate, read `protocol/LEARNING_BASED_RULES.md` before writing the experiment plan. It defines state/action/reward or model targets, training cost, leakage controls, matched non-learning baselines and held-out generalization tests.
 
 ## MATLAB style
 

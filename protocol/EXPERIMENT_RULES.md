@@ -9,6 +9,8 @@
 
 Before execution, write `ideas/<candidate>/EXPERIMENT_PLAN.md` with algorithm versions, manifest and adapter, function IDs/classes/dimensions, population, max FEs, seed schedule, objective and optimum conventions, boundary handling, outputs and diagnostics, statistics, promotion criteria and a runtime estimate. Keep pilot, medium and confirmatory outputs separate.
 
+If the candidate contains a learned controller or model, also define the train/validation/test split, state/action/reward or model target, reset and update schedule, online versus offline training cost, matched fixed/non-learning controls, leakage checks and generalization diagnostics. Read `LEARNING_BASED_RULES.md`.
+
 - Use objective-function evaluations as the fairness unit.
 - Keep pilot, medium and confirmatory results in separate directories.
 - Fix seeds before confirmatory evaluation.

@@ -7,17 +7,17 @@ metadata:
 
 # MATLAB Metaheuristic Experiments
 
-Plan or run the requested level and candidate in `$ARGUMENTS`. Read `AGENTS.md`, `RESEARCH_BRIEF.md`, `protocol/EXPERIMENT_RULES.md`, `protocol/MATLAB_STYLE.md`, the candidate specification, the selected suite manifest under `benchmarks/manifests/` and `benchmarks/README.md`. If no experiment plan exists, create `ideas/<candidate>/EXPERIMENT_PLAN.md` before execution.
+Plan or run the requested level and candidate in `$ARGUMENTS`. Read `AGENTS.md`, `RESEARCH_BRIEF.md`, `protocol/EXPERIMENT_RULES.md`, `protocol/MATLAB_STYLE.md`, the candidate specification, the selected suite manifest under `benchmarks/manifests/` and `benchmarks/README.md`. If the candidate learns a controller, surrogate or policy, also read `protocol/LEARNING_BASED_RULES.md`. If no experiment plan exists, create `ideas/<candidate>/EXPERIMENT_PLAN.md` before execution.
 
 ## Workflow
 
-1. **Plan:** specify algorithm versions, function IDs/classes/dimensions, population, max FEs, seeds, objective conventions, boundary handling, diagnostics, statistics, promotion criteria and expected runtime. Freeze these fields before confirmatory evaluation.
+1. **Plan:** specify algorithm versions, function IDs/classes/dimensions, population, max FEs, seeds, objective conventions, boundary handling, diagnostics, statistics, promotion criteria and expected runtime. For learning-based candidates also specify train/validation/test landscapes, state/action/reward or model target, reset and update schedule, training budget and matched fixed/null controllers. Freeze these fields before confirmatory evaluation.
 2. **Smoke:** one function, dimension and seed; verify implementation, bounds, deterministic replay, FE count and result schema.
 3. **Pilot:** screen the registered hypothesis on a small diverse set with fixed seeds.
 4. **Medium:** evaluate multiple function classes and dimensions with stronger baselines, mechanism diagnostics and minimal ablation.
 5. **Confirmatory:** use the frozen candidate and target suite protocol. Keep results separate from discovery and development data.
 
-Run only the level requested. Use `run_one.m`, `run_batch.m` and `validate_result_table.m` in `skills/matlab-experiment/scripts/`; record every run and retain failures. Follow `protocol/EXPERIMENT_RULES.md` and pass completed results to `metaheuristic-analyze`.
+Run only the level requested. Use `run_one.m`, `run_batch.m` and `validate_result_table.m` in `skills/matlab-experiment/scripts/`; record every run and retain failures. For online learning, count controller-training objective evaluations in the same FE budget. For offline/meta-training, keep training landscapes and costs separate from held-out test runs. Follow `protocol/EXPERIMENT_RULES.md` and pass completed results to `metaheuristic-analyze`.
 
 ## Execution
 
@@ -25,4 +25,4 @@ Check MATLAB, candidate files, result directory, selected suite and budget befor
 
 Default to CPU; bundled CEC MEX entrypoints are CPU paths. Use GPU only when both the algorithm and objective implement it and a same-configuration benchmark shows a useful speedup with equivalent values. The provided backend benchmark measures only a generic Sphere kernel.
 
-Use the scripts and result contract documented in `skills/matlab-experiment/references/RESULT_SCHEMA.md`. Keep runs append-only, retain failures, and check FE budgets, seed coverage and baseline comparability before handing results to `metaheuristic-analyze`. Detailed fairness rules are in `protocol/EXPERIMENT_RULES.md`.
+Use the scripts and result contract documented in `skills/matlab-experiment/references/RESULT_SCHEMA.md`. Keep runs append-only, retain failures, and check FE budgets, seed coverage, controller overhead, train/test separation and baseline comparability before handing results to `metaheuristic-analyze`. Detailed fairness rules are in `protocol/EXPERIMENT_RULES.md` and `protocol/LEARNING_BASED_RULES.md`.

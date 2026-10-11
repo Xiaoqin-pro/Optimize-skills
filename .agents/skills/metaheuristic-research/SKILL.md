@@ -7,7 +7,7 @@ metadata:
 
 # Metaheuristic Research
 
-Read `AGENTS.md`, `RESEARCH_BRIEF.md`, `RESEARCH_STATE.json` and relevant files under `protocol/`. Use `python scripts/research_state.py` for state changes.
+Read `AGENTS.md`, `RESEARCH_BRIEF.md`, `RESEARCH_STATE.json` and relevant files under `protocol/`. If the candidate uses a learned controller or surrogate, also read `protocol/LEARNING_BASED_RULES.md`. Use `python scripts/research_state.py` for state changes.
 
 ## Modes
 
@@ -21,6 +21,6 @@ Read `AGENTS.md`, `RESEARCH_BRIEF.md`, `RESEARCH_STATE.json` and relevant files 
 3. Use `matlab-experiment` to plan and execute the requested level.
 4. Use `metaheuristic-analyze` to validate results, test mechanism predictions and judge claim support.
 5. Use `metaheuristic-review` for an adversarial evidence review.
-6. If rejected, record the failure and return to a structurally different idea. If accepted, freeze the candidate and plan confirmatory work or paper preparation as requested.
+6. If rejected, record the failure and return to a structurally different idea. If accepted, freeze the candidate and plan confirmatory work or paper preparation as requested. For learning-based candidates, freeze the train/validation/test split, state/action/reward definition and training budget before confirmatory work.
 
 In autonomous mode, update state at each phase boundary, preserve negative results, respect configured candidate/generation limits and report why the loop stopped. Do not claim publication-level novelty from benchmark scores alone. Use existing `paper-writing` and `citation-audit` skills only when the user requests paper work.

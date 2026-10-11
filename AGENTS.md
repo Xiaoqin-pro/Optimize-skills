@@ -2,7 +2,7 @@
 
 ## Research Domain
 
-This skill set is for population-based stochastic optimization and swarm-intelligence algorithms, including PSO, CSO, ABC and related black-box optimizers.
+This skill set is for population-based stochastic optimization and swarm-intelligence algorithms, including PSO, CSO, ABC and related black-box optimizers, plus learning-augmented controllers for search.
 
 The five project skills are `metaheuristic-research`, `metaheuristic-idea`, `matlab-experiment`, `metaheuristic-analyze` and `metaheuristic-review`. Use the research skill for end-to-end orchestration; use a focused skill for a single idea, experiment, analysis or review task.
 
@@ -24,9 +24,13 @@ Novelty must be mechanism-level. A new animal metaphor, renamed variable, cosmet
 5. closest known mechanisms;
 6. falsification experiment.
 
+Candidates may be fixed mechanisms or learning-based controllers. When a candidate uses reinforcement learning, contextual bandits, hyper-heuristics, surrogate models or meta-learning, also specify its state, action, reward/model target, training protocol, overhead and held-out generalization test. Read [protocol/LEARNING_BASED_RULES.md](protocol/LEARNING_BASED_RULES.md).
+
 ## Evaluation Fairness
 
 Use objective-function evaluations (FEs), not iteration count, as the default fairness unit. Keep population size, function budget, dimensions, benchmark suite, and seed list comparable. Fix seeds before confirmatory runs and retain failed, neutral and negative runs.
+
+Count objective evaluations used to train an online controller in the same FE budget. Keep any offline/meta-training landscapes separate from held-out test landscapes and report training cost separately.
 
 ## Discovery / Development / Confirmatory Separation
 
@@ -50,4 +54,4 @@ Optional mechanism diagnostics include diversity, directional entropy, mean step
 
 ## Integrity
 
-Do not delete failed runs, cherry-pick favorable seeds, change seeds after seeing outcomes, or expand the budget only for a proposed method. A benchmark score improvement alone is not a novelty or publication claim.
+Do not delete failed runs, cherry-pick favorable seeds, change seeds after seeing outcomes, or expand the budget only for a proposed method. A benchmark score improvement alone is not a novelty or publication claim. Do not claim learning-based novelty from adding a Q-table, neural policy or bandit module alone; compare matched fixed and simple feedback controllers and test generalization beyond training landscapes or function IDs.

@@ -16,6 +16,8 @@ The claim card should state what each plausible result would mean, include a sho
 
 Generate structurally different candidates from the failure map, not coefficient variants. Each candidate states the observed failure, causal hypothesis, intervention and equations, expected regime, predicted diagnostic, cheapest falsification test, closest known mechanisms, new hyperparameters and runtime cost. Screen no more than 8 by default and pilot no more than 4.
 
+At least one candidate family may be learning-augmented when the failure is a control or allocation problem: contextual bandit/operator selection, RL policy control, hyper-heuristic scheduling, surrogate guidance or meta-learned search. Such a candidate must define state, action or model target, reward/uncertainty, update/reset schedule, training cost, matched non-learning null and held-out generalization test. Do not add a learner merely to make an existing formula look modern.
+
 ## 4. Normalize and check novelty
 
 Remove biological names. List state variables, information sources, topology, memory, sampling and update equations. Expand equations and check equivalence to known schedules, mutation, differential or Lévy perturbation, opposition sampling, restarts, archive guidance and diversity-triggered adaptation. Search by mechanism terms. A hybrid needs a falsifiable interaction hypothesis and a control that separates interaction from simple stacking. Return `PASS`, `HOLD` or `REJECT`; use `HOLD` when the closest mechanism is unclear.

@@ -13,10 +13,14 @@ Primary baselines: PSO, CSO and ABC. Add stronger baselines only after a literat
 1. Why do existing swarm algorithms prematurely converge on multimodal or rotated landscapes?
 2. Can population information flow be modified without many new hyperparameters?
 3. Can search behavior depend on measured swarm state instead of arbitrary schedules?
+4. Can a controller learn which operator, topology, restart or evaluation allocation to use from population state?
+5. Does that learned policy generalize to held-out functions, dimensions or landscape transformations?
 
 ## Preferred Novelty
 
-Prefer new information-flow mechanisms, adaptive interaction topology, state-dependent search, population-distribution modeling, principled stagnation detection and low-parameter diversity control.
+Prefer new information-flow mechanisms, adaptive interaction topology, state-dependent search, population-distribution modeling, principled stagnation detection, low-parameter diversity control and learning-augmented control of operators, topology, restarts or evaluation allocation.
+
+Learning-based candidates should use reinforcement learning, contextual bandits, hyper-heuristics, surrogate models or meta-learning only when the learned component has a causal role in the search decision and a testable generalization claim. The target is not to attach a generic neural network to a familiar update rule.
 
 Treat chaotic-map substitution, Lévy-flight insertion, opposition-based learning, arbitrary mutation insertion, cosmetic adaptive weights and unexplained hybridization as high-risk until a mechanism-specific hypothesis is demonstrated.
 
